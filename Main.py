@@ -22,6 +22,9 @@ def inicializar_camera():
 def iniciar():
     glClearColor(0.5, 0.8, 1.0, 1.0)
     glEnable(GL_DEPTH_TEST)
+    glShadeModel(GL_FLAT)
+    #glEnable(GL_CULL_FACE)
+    glEnable(GL_DEPTH_TEST)
 
 # ==================== PROJECAO ====================
 def changeSize(w, h):
@@ -119,15 +122,22 @@ def mouse_callback(cam):
 
 # ==================== RENDER ====================
 def desenharChao():
+
+    chao = [
+        [-10, 0, -100],
+        [10, 0, -100],
+        [10, 0, 100],
+        [-10, 0, 100]
+    ]
     glColor3f(0.3, 0.9, 0.3)
+
     glBegin(GL_QUADS)
-    glVertex3f(-100, 0, -100)
-    glVertex3f(100, 0, -100)
-    glVertex3f(100, 0, 100)
-    glVertex3f(-100, 0, 100)
+    for v in chao:
+        glVertex3fv(v)
     glEnd()
 
 def desenharCubo():
+
     glColor3f(1.0, 0.0, 0.0)
     tamanho = 1.0
     metade = tamanho / 2.0
@@ -143,6 +153,7 @@ def desenharCubo():
         [3, 2, 6, 7], [0, 1, 5, 4]
     ]
     glPushMatrix()
+
     glTranslatef(0, 0.5, 0)
     glBegin(GL_QUADS)
     for face in faces:
