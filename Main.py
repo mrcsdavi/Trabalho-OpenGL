@@ -23,7 +23,7 @@ def iniciar():
     glClearColor(0.5, 0.8, 1.0, 1.0)
     glEnable(GL_DEPTH_TEST)
     glShadeModel(GL_FLAT)
-    #glEnable(GL_CULL_FACE)
+    glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
 
 # ==================== PROJECAO ====================
@@ -124,10 +124,10 @@ def mouse_callback(cam):
 def desenharChao():
 
     chao = [
-        [-10, 0, -100],
-        [10, 0, -100],
-        [10, 0, 100],
-        [-10, 0, 100]
+        [-10, 0, 10],
+        [10, 0, 10],
+        [10, 0, -10],
+        [-10, 0, -10]
     ]
     glColor3f(0.3, 0.9, 0.3)
 
@@ -148,9 +148,9 @@ def desenharCubo():
         [metade, metade, metade], [-metade, metade, metade]
     ]
     faces = [
-        [0, 1, 2, 3], [4, 5, 6, 7],
-        [0, 4, 7, 3], [1, 5, 6, 2],
-        [3, 2, 6, 7], [0, 1, 5, 4]
+        [0, 3, 2, 1], [7, 4, 5, 6],
+        [1, 5, 4, 5], [3, 7, 6, 2],
+        [1, 2, 6, 5], [4, 7, 3, 0]
     ]
     glPushMatrix()
 
