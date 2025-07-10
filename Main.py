@@ -65,7 +65,6 @@ def processarInput(window, cam):
     comprimento = math.sqrt(sum(r ** 2 for r in right))
     right = [r / comprimento for r in right]
 
-    # Inicializar deslocamento
     deslocamento = [0.0, 0.0, 0.0]
 
     if glfw.get_key(window, glfw.KEY_W) == glfw.PRESS:
@@ -81,7 +80,6 @@ def processarInput(window, cam):
         deslocamento[0] += right[0]
         deslocamento[2] += right[2]
 
-    # Normaliza deslocamento
     comprimento = math.sqrt(deslocamento[0]**2 + deslocamento[2]**2)
     if comprimento > 0:
         deslocamento[0] /= comprimento
@@ -120,9 +118,26 @@ def mouse_callback(cam):
         atualizar_camera(cam)
     return callback
 
+# ==================== COLISAO AABB ====================
+def testar_colisao_aabb(ponto, raio, aabb_min, aabb_max):
+    px, py, pz = ponto
+    xmin, ymin, zmin = aabb_min
+    xmax, ymax, zmax = aabb_max
+
+    if (px + raio < xmin or px - raio > xmax or
+        py + raio < ymin or py - raio > ymax or
+        pz + raio < zmin or pz - raio > zmax):
+        return False
+    return True
+
+def testar_colisao(nova_pos):
+    cubo_min = [-0.5, 0.0, -0.5]
+    cubo_max = [0.5, 1.0, 0.5]
+    raio = 1.3
+    return testar_colisao_aabb(nova_pos, raio, cubo_min, cubo_max)
+
 # ==================== RENDER ====================
 def desenharChao():
-
     chao = [
         [-10, 0, 10],
         [10, 0, 10],
@@ -137,10 +152,8 @@ def desenharChao():
     glEnd()
 
 def desenharCubo():
-
     glColor3f(1.0, 0.0, 0.0)
-    tamanho = 1.0
-    metade = tamanho / 2.0
+    metade = 0.5
     vertices = [
         [-metade, -metade, -metade], [metade, -metade, -metade],
         [metade, metade, -metade], [-metade, metade, -metade],
@@ -149,11 +162,10 @@ def desenharCubo():
     ]
     faces = [
         [0, 3, 2, 1], [7, 4, 5, 6],
-        [1, 5, 4, 5], [3, 7, 6, 2],
+        [1, 5, 4, 0], [3, 7, 6, 2],
         [1, 2, 6, 5], [4, 7, 3, 0]
     ]
     glPushMatrix()
-
     glTranslatef(0, 0.5, 0)
     glBegin(GL_QUADS)
     for face in faces:
@@ -165,30 +177,31 @@ def desenharCubo():
 def desenhar_caixa_colisao():
     glColor3f(1, 1, 0)
     glBegin(GL_LINES)
-    v = [
-        (-0.5, 0.0, -0.5), (0.5, 0.0, -0.5),
-        (0.5, 0.0, 0.5), (-0.5, 0.0, 0.5),
-        (-0.5, 1.0, -0.5), (0.5, 1.0, -0.5),
-        (0.5, 1.0, 0.5), (-0.5, 1.0, 0.5)
-    ]
-    for i in range(4):
-        glVertex3fv(v[i])
-        glVertex3fv(v[(i+1)%4])
-        glVertex3fv(v[i+4])
-        glVertex3fv(v[((i+1)%4)+4])
-        glVertex3fv(v[i])
-        glVertex3fv(v[i+4])
-    glEnd()
 
-def testar_colisao(nova_pos):
     cubo_min = [-0.5, 0.0, -0.5]
-    cubo_max = [1, 1.0, 1]
-    raio = 0.2
-    x, z = nova_pos[0], nova_pos[2]
-    if (x + raio > cubo_min[0] and x - raio < cubo_max[0] and
-        z + raio > cubo_min[2] and z - raio < cubo_max[2]):
-        return True
-    return False
+    cubo_max = [0.5, 1.0, 0.5]
+
+    v = [
+        [cubo_min[0], cubo_min[1], cubo_min[2]],  # 0
+        [cubo_max[0], cubo_min[1], cubo_min[2]],  # 1
+        [cubo_max[0], cubo_min[1], cubo_max[2]],  # 2
+        [cubo_min[0], cubo_min[1], cubo_max[2]],  # 3
+        [cubo_min[0], cubo_max[1], cubo_min[2]],  # 4
+        [cubo_max[0], cubo_max[1], cubo_min[2]],  # 5
+        [cubo_max[0], cubo_max[1], cubo_max[2]],  # 6
+        [cubo_min[0], cubo_max[1], cubo_max[2]]   # 7
+    ]
+
+    edges = [
+        (0,1), (1,2), (2,3), (3,0),
+        (4,5), (5,6), (6,7), (7,4),
+        (0,4), (1,5), (2,6), (3,7)
+    ]
+
+    for a, b in edges:
+        glVertex3fv(v[a])
+        glVertex3fv(v[b])
+    glEnd()
 
 def render(cam):
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
