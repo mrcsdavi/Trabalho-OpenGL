@@ -25,6 +25,8 @@ def iniciar():
     glShadeModel(GL_FLAT)
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
 
 # ==================== PROJECAO ====================
 def changeSize(w, h):
@@ -133,11 +135,12 @@ def testar_colisao_aabb(ponto, raio, aabb_min, aabb_max):
 def testar_colisao(nova_pos):
     cubo_min = [-0.5, 0.0, -0.5]
     cubo_max = [0.5, 1.0, 0.5]
-    raio = 1.3
+    raio = 1.3 # isso aqui altera a distancia da colisao
     return testar_colisao_aabb(nova_pos, raio, cubo_min, cubo_max)
 
 # ==================== RENDER ====================
 def desenharChao():
+
     chao = [
         [-10, 0, 10],
         [10, 0, 10],
@@ -204,6 +207,9 @@ def desenhar_caixa_colisao():
     glEnd()
 
 def render(cam):
+   # ambientLight = [1.0, 1.0, 1.0, 1.0]
+    #glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight)
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
