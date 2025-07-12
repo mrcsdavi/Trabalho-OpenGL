@@ -1,16 +1,13 @@
+from Light_class import Light
 import glfw
 from OpenGL.GL import *
 from OpenGL.GLU import *
 import math
 
 
+
 # ==================== OPENGL SETUP ====================
 def iniciar():
-
-    ambientLight = [0.3, 0.3, 0.3, 1.0]
-    diffuseLight = [0.7, 0.7, 0.7, 1.0]
-    specular = [1.0, 1.0, 1.0, 1.0]
-    specref =  [1.0, 1.0, 1.0, 1.0]
 
     glEnable(GL_DEPTH_TEST) 
     glShadeModel(GL_FLAT)
@@ -19,20 +16,22 @@ def iniciar():
     glFrontFace(GL_CCW) # ajeita a face dos poligonos que podem estar pra dentro
 
     # iniciar iluminação
+    light = Light() # CLASSE INSTANCIADA ILUMINAÇÃO
+    light.iluminacao() #
+
     glEnable(GL_LIGHTING)
     glEnable(GL_LIGHT0)
 
-    
     # Para corrigir normais após transformações
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
-    glLightfv(GL_LIGHT0, GL_POSITION, [5.0, 10.0, 5.0, 1.0])
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight)
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight)
-    glLightfv(GL_LIGHT0, GL_SPECULAR, specular)
+    glLightfv(GL_LIGHT0, GL_POSITION, light.light_pos)
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light.ambientLight)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light.diffuseLight)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light.specular)
     
     glEnable(GL_COLOR_MATERIAL)
 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, specref)
+    glMaterialfv(GL_FRONT, GL_SPECULAR, light.specref)
     glMaterialf(GL_FRONT, GL_SHININESS, 128.0)
 
     glClearColor(0.5, 0.8, 1.0, 1.0)
@@ -202,8 +201,6 @@ def desenharChao():
         [-10, 0, -10]
     ]
     
-    #iluminação phong
-   
     glColor3f(0,1,0)
     glNormal3f(0, 1, 0)
     glBegin(GL_QUADS)
@@ -211,6 +208,7 @@ def desenharChao():
         glVertex3fv(v)
     glEnd()
 
+## para a sombra 
 def desenhar_cubo_sem_material():
     metade = 0.5
     vertices = [
@@ -248,9 +246,8 @@ def desenharCubo():
     normais = [
     [0, 0, -1], [0, 0, 1], [-1, 0, 0],
     [1, 0, 0], [0, 1, 0], [0, -1, 0]
-]
+    ]
 
-    # iluminação phong
    
     glPushMatrix()
     glTranslatef(0, 0.5, 0)
@@ -292,6 +289,8 @@ def desenhar_caixa_colisao():
     glEnd()
 
 def render(cam):
+    light = Light() # instancia a classe iluminação
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
@@ -305,12 +304,9 @@ def render(cam):
         pos[0] + front[0], pos[1] + front[1], pos[2] + front[2],
         up[0], up[1], up[2]
     )
-
-    light_pos = [20.0, 10.0, 5.0, 1.0] # posição da luz
-    glLightfv(GL_LIGHT0, GL_POSITION, light_pos)
     
     desenharChao()
-    desenhar_sombra(light_pos)
+    desenhar_sombra(light.light_pos) 
     desenharCubo()
     desenhar_caixa_colisao()
 
