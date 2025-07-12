@@ -25,8 +25,20 @@ def iniciar():
     glShadeModel(GL_FLAT)
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
+
+    # iniciar iluminação
     glEnable(GL_LIGHTING)
     glEnable(GL_LIGHT0)
+    glEnable(GL_NORMALIZE)  # Para corrigir normais após transformações
+    gerarIluminacao()  
+   
+    
+def gerarIluminacao():
+    glLightfv(GL_LIGHT0, GL_POSITION, [5.0, 10.0, 5.0, 1.0])
+    glLightfv(GL_LIGHT0, GL_AMBIENT, [0.2, 0.2, 0.2, 1.0])
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.7, 0.7, 0.7, 1.0])
+    glLightfv(GL_LIGHT0, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
+
 
 # ==================== PROJECAO ====================
 def changeSize(w, h):
@@ -147,8 +159,16 @@ def desenharChao():
         [10, 0, -10],
         [-10, 0, -10]
     ]
-    glColor3f(0.3, 0.9, 0.3)
+    
 
+    gray = [0.75, 0.75, 0.75, 1.0]
+
+    #iluminação phong
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [0.3, 0.9, 0.3, 1.0])
+    glMaterialfv(GL_FRONT, GL_SPECULAR, [0.1, 0.1, 0.1, 1.0])
+    glMaterialf(GL_FRONT, GL_SHININESS, 10.0)
+
+    glNormal3f(0, 1, 0)
     glBegin(GL_QUADS)
     for v in chao:
         glVertex3fv(v)
@@ -168,12 +188,20 @@ def desenharCubo():
         [1, 5, 4, 0], [3, 7, 6, 2],
         [1, 2, 6, 5], [4, 7, 3, 0]
     ]
+
+    # iluminação phong
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [1.0, 0.2, 0.2, 1.0])
+    glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
+    glMaterialf(GL_FRONT, GL_SHININESS, 64.0)
+    
     glPushMatrix()
     glTranslatef(0, 0.5, 0)
     glBegin(GL_QUADS)
     for face in faces:
         for vert in face:
+        
             glVertex3fv(vertices[vert])
+    
     glEnd()
     glPopMatrix()
 
@@ -207,8 +235,6 @@ def desenhar_caixa_colisao():
     glEnd()
 
 def render(cam):
-   # ambientLight = [1.0, 1.0, 1.0, 1.0]
-    #glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glMatrixMode(GL_MODELVIEW)
@@ -233,12 +259,12 @@ def main():
     if not glfw.init():
         return
 
-    window = glfw.create_window(800, 600, "FPS Camera", None, None)
+    window = glfw.create_window(800, 600, "Laboratorio", None, None)
     if not window:
         glfw.terminate()
         return
-
     glfw.make_context_current(window)
+    
     cam = inicializar_camera()
     glfw.set_cursor_pos_callback(window, mouse_callback(cam))
     glfw.set_input_mode(window, glfw.CURSOR, glfw.CURSOR_DISABLED)
@@ -253,6 +279,7 @@ def main():
         render(cam)
         glfw.swap_buffers(window)
         glfw.poll_events()
+        
 
     glfw.terminate()
 
