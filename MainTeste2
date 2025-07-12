@@ -3,6 +3,42 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import math
 
+
+# ==================== OPENGL SETUP ====================
+def iniciar():
+
+    ambientLight = [0.3, 0.3, 0.3, 1.0]
+    diffuseLight = [0.7, 0.7, 0.7, 1.0]
+    specular = [1.0, 1.0, 1.0, 1.0]
+    specref =  [1.0, 1.0, 1.0, 1.0]
+
+    glEnable(GL_DEPTH_TEST) 
+    glShadeModel(GL_FLAT)
+    glEnable(GL_CULL_FACE) # não renderiza o que ta dentro
+    glEnable(GL_DEPTH_TEST)
+    glFrontFace(GL_CCW) # ajeita a face dos poligonos que podem estar pra dentro
+
+    # iniciar iluminação
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
+
+    
+    # Para corrigir normais após transformações
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
+    glLightfv(GL_LIGHT0, GL_POSITION, [5.0, 10.0, 5.0, 1.0])
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular)
+    
+    glEnable(GL_COLOR_MATERIAL)
+
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specref)
+    glMaterialf(GL_FRONT, GL_SHININESS, 128.0)
+
+    glClearColor(0.5, 0.8, 1.0, 1.0)
+
+    glEnable(GL_NORMALIZE)
+
 # ==================== CONFIG CAMERA ====================
 def inicializar_camera():
     return {
@@ -43,30 +79,8 @@ def desenhar_sombra(light_pos):
     desenhar_cubo_sem_material()
     glPopMatrix()
 
+    ##  não remova isso
     glEnable(GL_LIGHTING)
-
-# ==================== OPENGL SETUP ====================
-def iniciar():
-    glClearColor(0.5, 0.8, 1.0, 1.0)
-    glEnable(GL_DEPTH_TEST)
-    glShadeModel(GL_FLAT)
-    glEnable(GL_CULL_FACE)
-    glEnable(GL_DEPTH_TEST)
-
-    # iniciar iluminação
-    glEnable(GL_LIGHTING)
-    glEnable(GL_LIGHT0)
-    glEnable(GL_NORMALIZE)  # Para corrigir normais após transformações
-
-    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
-    glLightfv(GL_LIGHT0, GL_POSITION, [5.0, 10.0, 5.0, 1.0])
-    glLightfv(GL_LIGHT0, GL_AMBIENT, [0.2, 0.2, 0.2, 1.0])
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.7, 0.7, 0.7, 1.0])
-    glLightfv(GL_LIGHT0, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
-    
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 64.0)
-
 
 # ==================== PROJECAO ====================
 def changeSize(w, h):
@@ -189,10 +203,8 @@ def desenharChao():
     ]
     
     #iluminação phong
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [0.3, 0.9, 0.3, 1.0])
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [0.1, 0.1, 0.1, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 10.0)
-
+   
+    glColor3f(0,1,0)
     glNormal3f(0, 1, 0)
     glBegin(GL_QUADS)
     for v in chao:
@@ -239,10 +251,7 @@ def desenharCubo():
 ]
 
     # iluminação phong
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [1.0, 0.2, 0.2, 1.0])
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 64.0)
-
+   
     glPushMatrix()
     glTranslatef(0, 0.5, 0)
     glBegin(GL_QUADS)
@@ -297,12 +306,7 @@ def render(cam):
         up[0], up[1], up[2]
     )
 
-    
-    
     light_pos = [20.0, 10.0, 5.0, 1.0] # posição da luz
-       
-
-    
     glLightfv(GL_LIGHT0, GL_POSITION, light_pos)
     
     desenharChao()
