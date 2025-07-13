@@ -31,7 +31,10 @@ def iniciar():
     glMaterialfv(GL_FRONT, GL_SPECULAR, light.specref)
     glMaterialf(GL_FRONT, GL_SHININESS, 64)
     
-    
+    # ativando o blending (deixou as sombras mais transparentes)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) 
+    glEnable(GL_BLEND)
+
     glClearColor(0.5, 0.8, 1.0, 1.0)
 
     glEnable(GL_NORMALIZE)
@@ -292,6 +295,10 @@ def desenhar_caixa_colisao():
 def render(cam):
     light = Light() # instancia a classe iluminação
     
+
+   
+
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
@@ -322,8 +329,9 @@ def main():
     if not window:
         glfw.terminate()
         return
-    glfw.make_context_current(window)
     
+    glfw.make_context_current(window) 
+
     cam = inicializar_camera()
     glfw.set_cursor_pos_callback(window, mouse_callback(cam))
     glfw.set_input_mode(window, glfw.CURSOR, glfw.CURSOR_DISABLED)
