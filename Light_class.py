@@ -1,3 +1,4 @@
+# Classe para colocar apenas valores para usar
 class Light:
     def __init__(self):
         #inicia iluminação

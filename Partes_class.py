@@ -9,3 +9,6 @@ class Partes:
 
     def Chao(self):
         pass
+
+    def Laje(self):
+        pass
