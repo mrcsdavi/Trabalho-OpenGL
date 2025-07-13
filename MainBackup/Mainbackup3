@@ -66,6 +66,7 @@ def iniciar():
     
     glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
     glMaterialf(GL_FRONT, GL_SHININESS, 64.0)
+    glEnable(GL_COLOR_MATERIAL)
 
 
 # ==================== PROJECAO ====================
@@ -180,7 +181,7 @@ def testar_colisao(nova_pos):
 
 # ==================== RENDER ====================
 def desenharChao():
-
+    glColor3f(0,1,0)
     chao = [
         [-10, 0, 10],
         [10, 0, 10],
@@ -188,11 +189,6 @@ def desenharChao():
         [-10, 0, -10]
     ]
     
-    #iluminação phong
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [0.3, 0.9, 0.3, 1.0])
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [0.1, 0.1, 0.1, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 10.0)
-
     glNormal3f(0, 1, 0)
     glBegin(GL_QUADS)
     for v in chao:
@@ -237,11 +233,6 @@ def desenharCubo():
     [0, 0, -1], [0, 0, 1], [-1, 0, 0],
     [1, 0, 0], [0, 1, 0], [0, -1, 0]
 ]
-
-    # iluminação phong
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [1.0, 0.2, 0.2, 1.0])
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [1.0, 1.0, 1.0, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 64.0)
 
     glPushMatrix()
     glTranslatef(0, 0.5, 0)
@@ -297,13 +288,9 @@ def render(cam):
         up[0], up[1], up[2]
     )
 
-    
-    
     light_pos = [20.0, 10.0, 5.0, 1.0] # posição da luz
        
-
     
-    glLightfv(GL_LIGHT0, GL_POSITION, light_pos)
     
     desenharChao()
     desenhar_sombra(light_pos)
