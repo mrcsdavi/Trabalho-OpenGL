@@ -1,10 +1,8 @@
-from Light_class import Light
+from Light_class import Light ## classe de iluminação importada
 import glfw
 from OpenGL.GL import *
 from OpenGL.GLU import *
 import math
-
-
 
 # ==================== OPENGL SETUP ====================
 def iniciar():
@@ -22,18 +20,18 @@ def iniciar():
     glEnable(GL_LIGHTING)
     glEnable(GL_LIGHT0)
 
-    # Para corrigir normais após transformações
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
     glLightfv(GL_LIGHT0, GL_POSITION, light.light_pos)
     glLightfv(GL_LIGHT0, GL_AMBIENT, light.ambientLight)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light.diffuseLight)
     glLightfv(GL_LIGHT0, GL_SPECULAR, light.specular)
     
-    glEnable(GL_COLOR_MATERIAL)
-
+    glEnable(GL_COLOR_MATERIAL) # cor dos materiais
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
     glMaterialfv(GL_FRONT, GL_SPECULAR, light.specref)
-    glMaterialf(GL_FRONT, GL_SHININESS, 128.0)
-
+    glMaterialf(GL_FRONT, GL_SHININESS, 64)
+    
+    
     glClearColor(0.5, 0.8, 1.0, 1.0)
 
     glEnable(GL_NORMALIZE)
@@ -66,20 +64,24 @@ def calcular_shadow_matrix(ground_plane, light_pos):
     return mat  
 
 def desenhar_sombra(light_pos):
-    chao_plano = [0.0, 1.0, 0.0, -0.001]  # y = 0
+    chao_plano = [0.0, 1.0, 0.0, -0.001]  # plano y = 0
     sombra_mat = calcular_shadow_matrix(chao_plano, light_pos)
+
+    # Converta para tipo aceito por glMultMatrixf (coluna-major)
+    from OpenGL.arrays import vbo
+    sombra_mat_gl = (GLfloat * 16)(*sombra_mat)
 
     glDisable(GL_LIGHTING)
     glColor4f(0.1, 0.1, 0.1, 0.7)
 
     glPushMatrix()
-    glMultMatrixf(sombra_mat)
-    glTranslatef(0, 0.5, 0)  # mesma posição do cubo
+    glMultMatrixf(sombra_mat_gl)  # Aplica a matriz de sombra
+    glTranslatef(0.0,0.5,0.0)       # mesma posição do cubo
     desenhar_cubo_sem_material()
     glPopMatrix()
 
-    ##  não remova isso
     glEnable(GL_LIGHTING)
+    
 
 # ==================== PROJECAO ====================
 def changeSize(w, h):
@@ -193,15 +195,14 @@ def testar_colisao(nova_pos):
 
 # ==================== RENDER ====================
 def desenharChao():
-
+    glColor3f(0,1,0)
     chao = [
         [-10, 0, 10],
         [10, 0, 10],
         [10, 0, -10],
         [-10, 0, -10]
     ]
-    
-    glColor3f(0,1,0)
+
     glNormal3f(0, 1, 0)
     glBegin(GL_QUADS)
     for v in chao:
@@ -230,6 +231,7 @@ def desenhar_cubo_sem_material():
 
 def desenharCubo():
     glColor3f(1.0, 0.0, 0.0)
+    
     metade = 0.5
     vertices = [
         [-metade, -metade, -metade], [metade, -metade, -metade],
@@ -247,10 +249,9 @@ def desenharCubo():
     [0, 0, -1], [0, 0, 1], [-1, 0, 0],
     [1, 0, 0], [0, 1, 0], [0, -1, 0]
     ]
-
-   
+    
     glPushMatrix()
-    glTranslatef(0, 0.5, 0)
+    glTranslatef(0.0, 0.5, 0.0)
     glBegin(GL_QUADS)
     for i, face in enumerate(faces):
         glNormal3fv(normais[i])
@@ -258,9 +259,9 @@ def desenharCubo():
             glVertex3fv(vertices[vert])
     glEnd()
     glPopMatrix()
-
+    
 def desenhar_caixa_colisao():
-    glColor3f(1, 1, 0)
+   
     glBegin(GL_LINES)
 
     cubo_min = [-0.5, 0.0, -0.5]
@@ -290,7 +291,7 @@ def desenhar_caixa_colisao():
 
 def render(cam):
     light = Light() # instancia a classe iluminação
-
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
@@ -304,10 +305,12 @@ def render(cam):
         pos[0] + front[0], pos[1] + front[1], pos[2] + front[2],
         up[0], up[1], up[2]
     )
-    
+
+    glLightfv(GL_LIGHT0, GL_POSITION, light.light_pos) # faz o brilho especular, deixar renderizando sempre. Nao mexa
+
     desenharChao()
-    desenhar_sombra(light.light_pos) 
     desenharCubo()
+    desenhar_sombra(light.light_pos) 
     desenhar_caixa_colisao()
 
 # ==================== MAIN ====================
