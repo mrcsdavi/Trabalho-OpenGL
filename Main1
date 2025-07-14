@@ -15,7 +15,8 @@ def iniciar():
 
     # iniciar iluminação
     light = Light() # CLASSE INSTANCIADA ILUMINAÇÃO
-    light.iluminacao() #
+    light.iluminacao() # função de iluminação instanciada
+
 
     glEnable(GL_LIGHTING)
     glEnable(GL_LIGHT0)
