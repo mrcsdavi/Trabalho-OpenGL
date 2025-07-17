@@ -1,5 +1,5 @@
 # Classe para colocar apenas valores para usar
-class Light:
+class LightClass:
     def __init__(self):
         #inicia iluminação
         self.light_pos = [20.0, 10.0, 5.0, 1.0] # posição da luz
