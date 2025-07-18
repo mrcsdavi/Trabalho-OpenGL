@@ -5,8 +5,9 @@ from OpenGL.GLU import *
 
 class CameraClass:
     def changeSize(w, h):
-        if h == 0:
-            h = 1
+        #if h == 0:
+        #    h = 1
+ 
         fAspect = w / h
         glViewport(0, 0, w, h)
         glMatrixMode(GL_PROJECTION)

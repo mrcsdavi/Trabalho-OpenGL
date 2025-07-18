@@ -8,9 +8,6 @@ import glfw
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-
-
-# ==================== MAIN ====================
 def main():
     
     if not glfw.init():

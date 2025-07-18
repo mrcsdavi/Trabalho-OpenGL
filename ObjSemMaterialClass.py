@@ -1,19 +1,12 @@
-# Aqui vem todos os objetos
-from LightClass import LightClass
+# Aqui vem todos os objetos sem material
+
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 
-class ObjetosClass:
-
-    def desenharCubo():
-        light = LightClass() 
-        light.iluminacao()
-        
-
-        glColor3f(1.0, 0.0, 0.0)
-        
+class ObjSemMatClass:
+    def desenharCuboSemMaterial(): ## segundo cubo para sombreamento
         metade = 0.5
         vertices = [
             [-metade, -metade, -metade], [metade, -metade, -metade],
@@ -26,22 +19,12 @@ class ObjetosClass:
             [1, 5, 4, 0], [3, 7, 6, 2],
             [1, 2, 6, 5], [4, 7, 3, 0]
         ]
-
-        normais = [
-        [0, 0, -1], [0, 0, 1], [-1, 0, 0],
-        [1, 0, 0], [0, 1, 0], [0, -1, 0]
-        ]
-        
-        glPushMatrix()
-        glTranslatef(0.0, 0.5, 0.0)
-        
+        glTranslatef(0.0, 0.5, 0.0) 
         glBegin(GL_QUADS)
-        for i, face in enumerate(faces):
-            glNormal3fv(normais[i])
+        for face in faces:
             for vert in face:
                 glVertex3fv(vertices[vert])
         glEnd()
-        glPopMatrix()
 
     def mesas():
         pass

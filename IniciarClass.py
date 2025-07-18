@@ -22,10 +22,11 @@ class IniciarClass:
         glEnable(GL_LIGHT0)
 
         glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
+        
         glLightfv(GL_LIGHT0, GL_POSITION, light.light_pos)
         glLightfv(GL_LIGHT0, GL_AMBIENT, light.ambientLight)
         glLightfv(GL_LIGHT0, GL_DIFFUSE, light.diffuseLight)
-        glLightfv(GL_LIGHT0, GL_SPECULAR, light.specular)
+        glLightfv(GL_LIGHT0, GL_SPECULAR, light.specular)  
         
         glEnable(GL_COLOR_MATERIAL) # cor dos materiais
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE) 

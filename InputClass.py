@@ -3,7 +3,6 @@ from CameraClass import CameraClass
 import glfw
 import math
 
-
 class InputClass:
     def __init__(window, cam):
         pos = cam["pos"]
