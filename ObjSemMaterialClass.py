@@ -6,25 +6,27 @@ from OpenGL.GLU import *
 
 
 class ObjSemMatClass:
-    def desenharCuboSemMaterial(): ## segundo cubo para sombreamento
-        metade = 0.5
-        vertices = [
-            [-metade, -metade, -metade], [metade, -metade, -metade],
-            [metade, metade, -metade], [-metade, metade, -metade],
-            [-metade, -metade, metade], [metade, -metade, metade],
-            [metade, metade, metade], [-metade, metade, metade]
-        ]
-        faces = [
-            [0, 3, 2, 1], [7, 4, 5, 6],
-            [1, 5, 4, 0], [3, 7, 6, 2],
-            [1, 2, 6, 5], [4, 7, 3, 0]
-        ]
-        glTranslatef(0.0, 0.5, 0.0) 
-        glBegin(GL_QUADS)
-        for face in faces:
-            for vert in face:
-                glVertex3fv(vertices[vert])
-        glEnd()
+    # O QUE ESTÁ COMENTADO É DO CUBO PARA TESTES !!!
+
+    # def desenharCuboSemMaterial(): ## segundo cubo para sombreamento
+    #     metade = 0.5
+    #     vertices = [
+    #         [-metade, -metade, -metade], [metade, -metade, -metade],
+    #         [metade, metade, -metade], [-metade, metade, -metade],
+    #         [-metade, -metade, metade], [metade, -metade, metade],
+    #         [metade, metade, metade], [-metade, metade, metade]
+    #     ]
+    #     faces = [
+    #         [0, 3, 2, 1], [7, 4, 5, 6],
+    #         [1, 5, 4, 0], [3, 7, 6, 2],
+    #         [1, 2, 6, 5], [4, 7, 3, 0]
+    #     ]
+    #     glTranslatef(0.0, 0.5, 0.0) 
+    #     glBegin(GL_QUADS)
+    #     for face in faces:
+    #         for vert in face:
+    #             glVertex3fv(vertices[vert])
+    #     glEnd()
 
     def mesas():
         pass

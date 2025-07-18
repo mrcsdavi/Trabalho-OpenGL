@@ -29,7 +29,7 @@ class CameraClass:
         
     def inicializarCamera():
         return {
-        "pos": [0.0, 1.1, 5.0],
+        "pos": [0.0, 1.1, 5.0], #posição original do Y = 1.1
         "front": [0.0, 0.0, -1.0],
         "up": [0.0, 1.0, 0.0],
         "yaw": -90.0,

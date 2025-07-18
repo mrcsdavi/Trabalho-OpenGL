@@ -6,12 +6,12 @@ from OpenGL.GLU import *
 class AmbienteClass:
     textura_chao = None  # textura é da classe, para ser reutilizada
 
-    def carregarTexturaChao():
-        if AmbienteClass.textura_chao is None:
-            AmbienteClass.textura_chao = textureClass("Packet.png")
+    
 
     def desenharChao():
-        AmbienteClass.carregarTexturaChao()
+   
+        if AmbienteClass.textura_chao is None:
+            AmbienteClass.textura_chao = textureClass("Packet.png")
 
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, AmbienteClass.textura_chao.texId)

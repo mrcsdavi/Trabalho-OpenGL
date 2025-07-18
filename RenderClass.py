@@ -28,5 +28,5 @@ class RenderClass:
         glLightfv(GL_LIGHT0, GL_POSITION, lightClass.light_pos) # faz o brilho especular, deixar renderizando sempre. Nao mexa
 
         AmbienteClass.desenharChao()
-        ObjetosClass.desenharCubo()
+       # ObjetosClass.desenharCubo()
         SombraClass.desenharSombra(lightClass.light_pos) 
