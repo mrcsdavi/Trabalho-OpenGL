@@ -31,12 +31,12 @@ def main():
     while not glfw.window_should_close(window):
         width, height = glfw.get_framebuffer_size(window)
         CameraClass.changeSize(width, height)
+        
         InputClass.processarInput(window, cam)
         RenderClass.render(cam)
         glfw.swap_buffers(window)
         glfw.poll_events()
         
-
     glfw.terminate()
 
 if __name__ == "__main__":

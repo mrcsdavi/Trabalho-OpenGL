@@ -31,7 +31,7 @@ class SombraClass:
         # matriz pra redesenhar o mesmo objeto mas sem o material dele, para desenhar sua sombra
         glPushMatrix()
         glMultMatrixf(sombra_mat_gl)  
-        #ObjSemMatClass.desenharCuboSemMaterial() # DO CUBO PARA TESTES !!
+        # ObjSemMatClass.desenharCuboSemMaterial() # DO CUBO PARA TESTES !!
         glPopMatrix()
 
         glEnable(GL_LIGHTING)

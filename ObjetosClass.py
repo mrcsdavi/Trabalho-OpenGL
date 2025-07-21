@@ -7,9 +7,9 @@ from OpenGL.GLU import *
 
 
 class ObjetosClass:
-    # O QUE ESTA COMENTADO É DO CUBO PARA TESTES !!
+    #O QUE ESTA COMENTADO É DO CUBO PARA TESTES !!
 
-    # texturaCubo = None
+    texturaCubo = None
 
     # def desenharCubo():
     #     light = LightClass() 
@@ -49,9 +49,7 @@ class ObjetosClass:
     #     [1, 0, 0], [0, 1, 0], [0, -1, 0]
     #     ]
     #     glGenerateMipmap(GL_TEXTURE_2D)
-    #     glPushMatrix()
-    #     glTranslatef(0.0, 0.5, 0.0) 
-        
+
     #     glBegin(GL_QUADS)
     #     for i, face in enumerate(faces):
     #         glNormal3fv(normais[i])
@@ -59,7 +57,6 @@ class ObjetosClass:
     #             glTexCoord2fv(texCoords[j])
     #             glVertex3fv(vertices[vert])
     #     glEnd()
-    #     glPopMatrix()
 
     def mesas():
         pass

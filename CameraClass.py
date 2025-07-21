@@ -38,5 +38,5 @@ class CameraClass:
         "lastY": 300,
         "primeiro_mov": True,
         "sensibilidade": 0.1,
-        "velocidade": 0.003
+        "velocidade": 0.003,
     }
