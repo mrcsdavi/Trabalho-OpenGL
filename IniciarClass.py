@@ -16,6 +16,7 @@ class IniciarClass:
         glShadeModel(GL_FLAT)
         glEnable(GL_CULL_FACE) # não renderiza o que ta dentro
         glFrontFace(GL_CCW) # ajeita a face dos poligonos que podem estar pra dentro
+        
 
         ## INICIAR ILUMINAÇÃO
         glEnable(GL_LIGHTING)

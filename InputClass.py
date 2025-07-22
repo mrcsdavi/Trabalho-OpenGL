@@ -16,7 +16,6 @@ class InputClass:
         front = cam["front"]
         up = cam["up"]
         
-
         # Calcular vetor lateral
         right = [
             front[2] * up[1] - front[1] * up[2],

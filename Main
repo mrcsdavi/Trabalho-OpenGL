@@ -27,7 +27,7 @@ def main():
 
     IniciarClass.iniciar()
     CameraClass.atualizarCamera(cam)
-
+    
     while not glfw.window_should_close(window):
         width, height = glfw.get_framebuffer_size(window)
         CameraClass.changeSize(width, height)
