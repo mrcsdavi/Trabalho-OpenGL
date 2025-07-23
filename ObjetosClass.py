@@ -191,19 +191,12 @@ class ObjetosClass:
         glDisable(GL_TEXTURE_2D)
 
     def diego():
-        if ObjetosClass.modeloDiego is None:
-            ObjetosClass.modeloDiego = ModeloClass("Diego.obj", "diegoTexture.png")
-        
-        
-        
-        # mais ...
-
-    def desenharModeloImportado():
         if ObjetosClass.modeloImportado is None:
             ObjetosClass.modeloImportado = ModeloClass(
                 "Diego.obj",
-                "Chao.png"
+                "DiegoCorpo.png"
             )
+            
 
         ObjetosClass.modeloImportado.desenhar()
       

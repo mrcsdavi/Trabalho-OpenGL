@@ -71,7 +71,7 @@ class RenderClass:
         glTranslatef(-3.5, 0, -5)
         glScalef(0.25, 0.25,0.25)
         glRotate(90, 0, 1, 0.0)
-        ObjetosClass.desenharModeloImportado()
+        ObjetosClass.diego()
 
         glPopMatrix()
    
