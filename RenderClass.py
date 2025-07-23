@@ -2,6 +2,7 @@ from LightClass import LightClass
 from ObjetosClass import ObjetosClass
 from SombraClass import SombraClass
 from AmbienteClass import AmbienteClass
+from ModeloClass import ModeloClass
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -29,25 +30,61 @@ class RenderClass:
 
         # ambiente
         AmbienteClass.desenharChao()
-        AmbienteClass.ParedeEsquerda()
-        AmbienteClass.ParedeDireita()
-        AmbienteClass.ParedeFrontal()
-        AmbienteClass.ParedeTraseira()
         AmbienteClass.Teto()
+        # parede da direita
+        AmbienteClass.Parede()
 
+        # parede da esquerda
+        glPushMatrix()
+        glTranslatef(0,3,0)
+        glRotatef(180,1,0,0)
+        AmbienteClass.Parede()
+        glPopMatrix()
+
+        # parede das costas da camera
+        glPushMatrix()
+        glTranslatef(7, 0, 0)
+        glRotatef(270, 0, 9, 0)
+        AmbienteClass.Parede()
+        glPopMatrix()
+
+        # parede da frente da camera
+        glPushMatrix()
+        glTranslatef(0, 0, 0)
+        glRotatef(450, 0, 9, 0)
+        AmbienteClass.Parede()
+        glPopMatrix()
+
+        #porta
         glPushMatrix()
         glTranslate(-5, 0.99, -5.99)
         ObjetosClass.desenharPorta()
         glPopMatrix()
-
+        
+        #lixeira
         glPushMatrix()
         glTranslate(-4, 0.15 , -5.5)
         ObjetosClass.desenharLixeira()
         glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(-3.5, 0, -5)
+        glScalef(0.25, 0.25,0.25)
+        glRotate(90, 0, 1, 0.0)
+        ObjetosClass.desenharModeloImportado()
+
+        glPopMatrix()
+   
+
+        # Desenha o modelo importado
+        
+   
+
 
         # glPushMatrix()
         # glTranslate(0.0, 0.5, 0.0)
         # ObjetosClass.desenharCubo()
         # glPopMatrix()
 
-        SombraClass.desenharSombra(lightClass.light_pos) 
+
+        SombraClass.desenharSombra(lightClass.light_pos)

@@ -44,7 +44,7 @@ class AmbienteClass:
             AmbienteClass.texturaParede = textureClass("Parede.jpg")
 
     # PAREDES
-    def ParedeFrontal():
+    def Parede():
         AmbienteClass.carregarTexturaParede()
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, AmbienteClass.texturaParede.texId)
@@ -72,95 +72,9 @@ class AmbienteClass:
         glBindTexture(GL_TEXTURE_2D, 0)
         glDisable(GL_TEXTURE_2D)
 
-    def ParedeTraseira():
-        AmbienteClass.carregarTexturaParede()
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, AmbienteClass.texturaParede.texId)
-        glColor3f(1, 1, 1)
-
-        parede = [
-            [13, 0, 6],
-            [-6, 0, 6],
-            [-6, 3, 6],
-            [13, 3, 6]
-        ]
-        texCoords = [
-            (0, 0),
-            (12, 0),
-            (12, 2),
-            (0, 2)
-        ]
-
-        glNormal3f(0, 0, -1)
-        glBegin(GL_QUADS)
-        for i in range(4):
-            glTexCoord2f(*texCoords[i])
-            glVertex3fv(parede[i])
-        glEnd()
-        glBindTexture(GL_TEXTURE_2D, 0)
-        glDisable(GL_TEXTURE_2D)
-
-    def ParedeEsquerda():
-        AmbienteClass.carregarTexturaParede()
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, AmbienteClass.texturaParede.texId)
-        glColor3f(1, 1, 1)
-
-        parede = [
-            [-6, 0, 6],
-            [-6, 0, -6],
-            [-6, 3, -6],
-            [-6, 3, 6]
-        ]
-        texCoords = [
-            (0, 0),
-            (12, 0),
-            (12, 2),
-            (0, 2)
-        ]
-
-        glNormal3f(1, 0, 0)
-        glBegin(GL_QUADS)
-        for i in range(4):
-            glTexCoord2f(*texCoords[i])
-            glVertex3fv(parede[i])
-        glEnd()
-        glBindTexture(GL_TEXTURE_2D, 0)
-        glDisable(GL_TEXTURE_2D)
-
-    def ParedeDireita():
-        AmbienteClass.carregarTexturaParede()
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, AmbienteClass.texturaParede.texId)
-        glColor3f(1, 1, 1)
-
-        parede = [
-            [13, 0, -6],
-            [13, 0, 6],
-            [13, 3, 6],
-            [13, 3, -6]
-        ]
-        texCoords = [
-            (0, 0),
-            (12, 0),
-            (12, 2),
-            (0, 2)
-        ]
-
-        glNormal3f(-1, 0, 0)
-        glBegin(GL_QUADS)
-        for i in range(4):
-            glTexCoord2f(*texCoords[i])
-            glVertex3fv(parede[i])
-        glEnd()
-        glBindTexture(GL_TEXTURE_2D, 0)
-        glDisable(GL_TEXTURE_2D)
-
-    # OUTRAS FUNCOES
-
     def Teto():
         if AmbienteClass.texturaParede is None:
-            AmbienteClass.texturaParede = textureClass("Parede.png")  # Usa a mesma textura do chão, ou troque por "Teto.png"
+            AmbienteClass.texturaParede = textureClass("Parede.jpg")  # Usa a mesma textura do chão, ou troque por "Teto.png"
 
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, AmbienteClass.texturaParede.texId)
@@ -175,9 +89,9 @@ class AmbienteClass:
 
         texCoords = [
             (0, 0),
-            (12, 0),
-            (12, 6),
-            (0, 6)
+            (3, 0),
+            (3, 3),
+            (0, 3)
         ]
 
         glNormal3f(0, -1, 0)  # Normal apontando para baixo

@@ -1,4 +1,6 @@
 # Aqui vem todos os objetos
+from ModeloClass import ModeloClass
+
 from LightClass import LightClass
 from TextureClass import textureClass
 import math
@@ -13,53 +15,55 @@ class ObjetosClass:
     texturaCubo = None
     texturaPorta = None
     texturaLixeira = None
+    modeloDiego = None
+    modeloImportado = None
 
-    def desenharCubo():
-        light = LightClass() 
-        light.iluminacao()
+    # def desenharCubo():
+    #     light = LightClass() 
+    #     light.iluminacao()
 
-        if ObjetosClass.texturaCubo is None:
-           ObjetosClass.texturaCubo = textureClass("Parede.jpg")
+    #     if ObjetosClass.texturaCubo is None:
+    #        ObjetosClass.texturaCubo = textureClass("Parede.jpg")
 
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, ObjetosClass.texturaCubo.texId)
+    #     glEnable(GL_TEXTURE_2D)
+    #     glBindTexture(GL_TEXTURE_2D, ObjetosClass.texturaCubo.texId)
         
 
-        glColor3f(1.0, 0.0, 0.0)
+    #     glColor3f(1.0, 0.0, 0.0)
         
-        metade = 0.5
-        vertices = [
-            [-metade, -metade, -metade], [metade, -metade, -metade],
-            [metade, metade, -metade], [-metade, metade, -metade],
-            [-metade, -metade, metade], [metade, -metade, metade],
-            [metade, metade, metade], [-metade, metade, metade]
-        ]
-        faces = [
-            [0, 3, 2, 1], [7, 4, 5, 6],
-            [1, 5, 4, 0], [3, 7, 6, 2],
-            [1, 2, 6, 5], [4, 7, 3, 0]
-        ]
+    #     metade = 0.5
+    #     vertices = [
+    #         [-metade, -metade, -metade], [metade, -metade, -metade],
+    #         [metade, metade, -metade], [-metade, metade, -metade],
+    #         [-metade, -metade, metade], [metade, -metade, metade],
+    #         [metade, metade, metade], [-metade, metade, metade]
+    #     ]
+    #     faces = [
+    #         [0, 3, 2, 1], [7, 4, 5, 6],
+    #         [1, 5, 4, 0], [3, 7, 6, 2],
+    #         [1, 2, 6, 5], [4, 7, 3, 0]
+    #     ]
 
-        texCoords = [
-            (0, 0),
-            (1, 0),
-            (1, 1),
-            (0, 1),
-        ]
+    #     texCoords = [
+    #         (0, 0),
+    #         (1, 0),
+    #         (1, 1),
+    #         (0, 1),
+    #     ]
 
-        normais = [
-        [0, 0, -1], [0, 0, 1], [-1, 0, 0],
-        [1, 0, 0], [0, 1, 0], [0, -1, 0]
-        ]
-        glGenerateMipmap(GL_TEXTURE_2D)
+    #     normais = [
+    #     [0, 0, -1], [0, 0, 1], [-1, 0, 0],
+    #     [1, 0, 0], [0, 1, 0], [0, -1, 0]
+    #     ]
+    #     glGenerateMipmap(GL_TEXTURE_2D)
 
-        glBegin(GL_QUADS)
-        for i, face in enumerate(faces):
-            glNormal3fv(normais[i])
-            for j, vert in enumerate(face):
-                glTexCoord2fv(texCoords[j])
-                glVertex3fv(vertices[vert])
-        glEnd()
+    #     glBegin(GL_QUADS)
+    #     for i, face in enumerate(faces):
+    #         glNormal3fv(normais[i])
+    #         for j, vert in enumerate(face):
+    #             glTexCoord2fv(texCoords[j])
+    #             glVertex3fv(vertices[vert])
+    #     glEnd()
 
     def mesas():
         pass
@@ -186,7 +190,25 @@ class ObjetosClass:
         glBindTexture(GL_TEXTURE_2D, 0)
         glDisable(GL_TEXTURE_2D)
 
-    def diego(): # colocar ele so pra frescar
-        pass
+    def diego():
+        if ObjetosClass.modeloDiego is None:
+            ObjetosClass.modeloDiego = ModeloClass("Diego.obj", "diegoTexture.png")
+        
+        
         
         # mais ...
+
+    def desenharModeloImportado():
+        if ObjetosClass.modeloImportado is None:
+            ObjetosClass.modeloImportado = ModeloClass(
+                "Diego.obj",
+                "Chao.png"
+            )
+
+        ObjetosClass.modeloImportado.desenhar()
+      
+
+        
+    # Posiciona o modelo corretamente na cena
+        
+        

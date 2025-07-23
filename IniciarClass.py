@@ -7,7 +7,7 @@ from OpenGL.GLU import *
 class IniciarClass:
     # ==================== OPENGL SETUP ====================
     def iniciar():
-    
+
         light = LightClass() # CLASSE INSTANCIADA ILUMINAÇÃO
         light.iluminacao() # função de iluminação instanciada
 
