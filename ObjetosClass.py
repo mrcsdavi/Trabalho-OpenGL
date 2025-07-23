@@ -16,7 +16,7 @@ class ObjetosClass:
     texturaPorta = None
     texturaLixeira = None
     modeloDiego = None
-    modeloImportado = None
+    modeloMesa = None
 
     # def desenharCubo():
     #     light = LightClass() 
@@ -191,14 +191,20 @@ class ObjetosClass:
         glDisable(GL_TEXTURE_2D)
 
     def diego():
-        if ObjetosClass.modeloImportado is None:
-            ObjetosClass.modeloImportado = ModeloClass(
+        if ObjetosClass.modeloDiego is None:
+            ObjetosClass.modeloDiego = ModeloClass(
                 "Diego.obj",
                 "DiegoCorpo.png"
             )
-            
+        ObjetosClass.modeloDiego.desenhar()
 
-        ObjetosClass.modeloImportado.desenhar()
+    def mesa():
+        if ObjetosClass.modeloMesa is None:
+            ObjetosClass.modeloMesa = ModeloClass(
+                "Mesas.obj",
+                "TexturaMesa.jpg"
+            )
+        ObjetosClass.modeloMesa.desenhar()
       
 
         

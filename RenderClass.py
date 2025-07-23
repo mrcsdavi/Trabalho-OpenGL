@@ -72,7 +72,14 @@ class RenderClass:
         glScalef(0.25, 0.25,0.25)
         glRotate(90, 0, 1, 0.0)
         ObjetosClass.diego()
+        glPopMatrix()
 
+
+        glPushMatrix()
+        glTranslatef(10, 0.8, 4)
+        glScalef(0.013, 0.013,0.013)
+        glRotate(90, 0, 1, 0.0)
+        ObjetosClass.mesa()
         glPopMatrix()
    
 
