@@ -1,10 +1,8 @@
-# Aqui vem todos os objetos
 from ModeloClass import ModeloClass
-
 from LightClass import LightClass
 from TextureClass import textureClass
-import math
 
+import math
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
@@ -65,8 +63,198 @@ class ObjetosClass:
     #             glVertex3fv(vertices[vert])
     #     glEnd()
 
-    def mesas():
-        pass
+    def mesa():
+        def mesa1():
+            if ObjetosClass.modeloMesa is None:
+                ObjetosClass.modeloMesa = ModeloClass(
+                    "Mesa.obj",
+                    "TexturaMesa.jpg"
+                )
+            ObjetosClass.modeloMesa.desenhar()
+        
+        # Mesas da esquerda - do fundão
+        glPushMatrix()
+        glTranslatef(10, -0.01, 5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(10, -0.01, 3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(10, -0.01, 2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+        
+        # Mesas da esquerda - do meio
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, 5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, 3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, 2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # Mesas da esquerda - do meio acima do meio
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, 5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, 3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, 2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # mesas da esquerda - lá da frente
+
+        glPushMatrix()
+        glTranslatef(1, -0.01, 5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(1, -0.01, 3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(1, -0.01, 2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # MESAS DA DIREITA - do fundão
+
+        glPushMatrix()
+        glTranslatef(10, -0.01, -5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(10, -0.01, -3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(10, -0.01, -2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # MESAS DA DIREITA - do meio
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, -5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, -3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(7, -0.01, -2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # MESAS DA DIREITA - do meio
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        # MESAS DA DIREITA - da frente
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -3.5)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(4, -0.01, -2)
+        glScalef(0.8, 0.8, 0.5)
+        glRotate(90, 0, 1, 0.0)
+        mesa1()
+        glPopMatrix()
+
 
     def cadeiras():
         pass
@@ -128,83 +316,25 @@ class ObjetosClass:
         glDisable(GL_TEXTURE_2D)
 
     def desenharLixeira():
-        light = LightClass() 
-        light.iluminacao()
-
-        if ObjetosClass.texturaLixeira is None:
-            ObjetosClass.texturaLixeira = textureClass("Chao.png")  # Use sua textura de lixeira
-
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, ObjetosClass.texturaLixeira.texId)
+        pass
         
-        glColor3f(1.0, 1.0, 1.0)  # Branco para não interferir na textura
-        
-        # Dimensões da lixeira (mais alta que larga)
-        largura = 0.1
-        altura = 0.15
-        profundidade = 0.1
-        
-        vertices = [
-            [-largura, -altura, -profundidade], [largura, -altura, -profundidade],
-            [largura, altura, -profundidade], [-largura, altura, -profundidade],
-            [-largura, -altura, profundidade], [largura, -altura, profundidade],
-            [largura, altura, profundidade], [-largura, altura, profundidade]
-        ]
-        
-        # Mesma ordem de faces do cubo original
-        faces = [
-            [0, 3, 2, 1],  # Face traseira
-            [7, 4, 5, 6],  # Face frontal
-            [1, 5, 4, 0],  # Face inferior
-            [3, 7, 6, 2],  # Face superior
-            [1, 2, 6, 5],  # Face direita
-            [4, 7, 3, 0]   # Face esquerda
-        ]
-
-        texCoords = [
-            (0, 0),
-            (1, 0),
-            (1, 1),
-            (0, 1),
-        ]
-
-        normais = [
-            [0, 0, -1],  # Traseira
-            [0, 0, 1],   # Frontal
-            [0, -1, 0],  # Inferior
-            [0, 1, 0],   # Superior
-            [1, 0, 0],   # Direita
-            [-1, 0, 0]   # Esquerda
-        ]
-        
-        glGenerateMipmap(GL_TEXTURE_2D)
-
-        glBegin(GL_QUADS)
-        for i, face in enumerate(faces):
-            glNormal3fv(normais[i])
-            for j, vert in enumerate(face):
-                glTexCoord2fv(texCoords[j])
-                glVertex3fv(vertices[vert])
-        glEnd()
-        
-        glBindTexture(GL_TEXTURE_2D, 0)
-        glDisable(GL_TEXTURE_2D)
-
     def diego():
-        if ObjetosClass.modeloDiego is None:
-            ObjetosClass.modeloDiego = ModeloClass(
-                "Diego.obj",
-                "DiegoCorpo.png"
-            )
-        ObjetosClass.modeloDiego.desenhar()
+        def diegoModelo():
+            if ObjetosClass.modeloDiego is None:
+                ObjetosClass.modeloDiego = ModeloClass(
+                    "Diego.obj",
+                    "DiegoCorpo.png"
+                )
+            ObjetosClass.modeloDiego.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(-3.5, 0, -5)
+        glScalef(0.25, 0.25,0.25)
+        glRotate(90, 0, 1, 0.0)
+        diegoModelo()
+        glPopMatrix()
 
-    def mesa():
-        if ObjetosClass.modeloMesa is None:
-            ObjetosClass.modeloMesa = ModeloClass(
-                "Mesas.obj",
-                "TexturaMesa.jpg"
-            )
-        ObjetosClass.modeloMesa.desenhar()
+    
       
 
         

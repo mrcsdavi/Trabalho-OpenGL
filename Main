@@ -2,7 +2,7 @@ from IniciarClass import  IniciarClass
 from CameraClass import CameraClass 
 # from SombraClass import SombraClass
 from RenderClass import RenderClass
-from InputClass import InputClass
+from InputClass import InputClass   
 
 import glfw
 from OpenGL.GL import *

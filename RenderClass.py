@@ -32,28 +32,28 @@ class RenderClass:
         AmbienteClass.desenharChao()
         AmbienteClass.Teto()
         # parede da direita
-        AmbienteClass.Parede()
+        # AmbienteClass.Parede()
 
-        # parede da esquerda
-        glPushMatrix()
-        glTranslatef(0,3,0)
-        glRotatef(180,1,0,0)
-        AmbienteClass.Parede()
-        glPopMatrix()
+        # # parede da esquerda
+        # glPushMatrix()
+        # glTranslatef(0,3,0)
+        # glRotatef(180,1,0,0)
+        # AmbienteClass.Parede()
+        # glPopMatrix()
 
-        # parede das costas da camera
-        glPushMatrix()
-        glTranslatef(7, 0, 0)
-        glRotatef(270, 0, 9, 0)
-        AmbienteClass.Parede()
-        glPopMatrix()
+        # # parede das costas da camera
+        # glPushMatrix()
+        # glTranslatef(7, 0, 0)
+        # glRotatef(270, 0, 9, 0)
+        # AmbienteClass.Parede()
+        # glPopMatrix()
 
-        # parede da frente da camera
-        glPushMatrix()
-        glTranslatef(0, 0, 0)
-        glRotatef(450, 0, 9, 0)
-        AmbienteClass.Parede()
-        glPopMatrix()
+        # # parede da frente da camera
+        # glPushMatrix()
+        # glTranslatef(0, 0, 0)
+        # glRotatef(450, 0, 9, 0)
+        # AmbienteClass.Parede()
+        # glPopMatrix()
 
         #porta
         glPushMatrix()
@@ -67,22 +67,16 @@ class RenderClass:
         ObjetosClass.desenharLixeira()
         glPopMatrix()
 
-        glPushMatrix()
-        glTranslatef(-3.5, 0, -5)
-        glScalef(0.25, 0.25,0.25)
-        glRotate(90, 0, 1, 0.0)
+        #Diego
         ObjetosClass.diego()
-        glPopMatrix()
-
-
-        glPushMatrix()
-        glTranslatef(10, 0.8, 4)
-        glScalef(0.013, 0.013,0.013)
-        glRotate(90, 0, 1, 0.0)
         ObjetosClass.mesa()
-        glPopMatrix()
-   
 
+        AmbienteClass.Parede()
+        AmbienteClass.ParedeJanela()
+        AmbienteClass.janela()
+      
+       
+   
         # Desenha o modelo importado
         
    

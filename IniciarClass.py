@@ -11,7 +11,6 @@ class IniciarClass:
         light = LightClass() # CLASSE INSTANCIADA ILUMINAÇÃO
         light.iluminacao() # função de iluminação instanciada
 
-
         glEnable(GL_DEPTH_TEST) 
         glShadeModel(GL_FLAT)
         glEnable(GL_CULL_FACE) # não renderiza o que ta dentro

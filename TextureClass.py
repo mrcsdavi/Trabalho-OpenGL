@@ -22,7 +22,7 @@ class textureClass:
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST)
 
         glTexImage2D(
             GL_TEXTURE_2D,
@@ -38,5 +38,6 @@ class textureClass:
 
         glGenerateMipmap(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, 0)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST)
 
         textureClass.loaded_textures[fullPath] = self.texId
