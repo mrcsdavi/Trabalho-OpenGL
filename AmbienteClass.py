@@ -8,7 +8,8 @@ class AmbienteClass:
     
     texturaChao = None  # textura é da classe, para ser reutilizada
     texturaParede = None
-    
+
+    modeloParedeDir = None
     modeloParede = None
     modeloParedeJanela = None
     modeloJanela = None
@@ -137,6 +138,23 @@ class AmbienteClass:
         Parede1()
         glPopMatrix()
        
+    def ParedeDir():
+        def ParedeDir():
+            if AmbienteClass.modeloParedeDir is None:
+                AmbienteClass.modeloParedeDir = ModeloClass(
+                    "ParedeDireita.obj",
+                    "Parede.jpg"
+                )
+            AmbienteClass.modeloParedeDir.desenhar()
+        
+        # parede da esquerda (janela)
+        glPushMatrix()
+        glRotatef(90, 0, 1, 0)
+        glTranslatef(6.4 , -0.01 , 8)
+        glScalef(0.5, 0.6, 0.5)
+        ParedeDir()
+        glPopMatrix()
+
     def ParedeJanela():
         def ParedeJanela():
             if AmbienteClass.modeloParedeJanela is None:
@@ -163,16 +181,55 @@ class AmbienteClass:
                 )
             AmbienteClass.modeloJanela.desenhar()
         
-        # parede da esquerda (janela)
+        #parede da esquerda (janelas) - buraco 1
+        linha = 11.5
+        coluna = 0.4
+        for i in range(4):
+            for j in range(4):
+                glPushMatrix()
+                glTranslatef(linha, coluna, 6)
+                glRotatef(0, 0, 1, 0)
+                glScalef(0.9, 0.6, 0.5)
+                janela()
+                glPopMatrix()
+                linha = linha - 1.1
+                if(linha < 8.2):
+                    linha = 11.5  
+            coluna = coluna + 0.6
 
-        glPushMatrix()
-        glRotatef(90, 0, 1, 0)
-        glTranslatef(-6 , -0.01 , 8)
-        glScalef(0.5, 0.6, 0.5)
-        janela()
-        glPopMatrix()
-       
+        # buraco 2 - janelas
+        linha1 = 6.5
+        coluna1 = 0.4
+        for i in range(4):
+            for j in range(4):
+                glPushMatrix()
+                glTranslatef(linha1, coluna1, 6)
+                glRotatef(0, 0, 1, 0)
+                glScalef(0.9, 0.6, 0.5)
+                janela()
+                glPopMatrix()
+                linha1 = linha1 - 1.1
+                if(linha1 < 3.2):
+                    linha1 = 6.5 
+            coluna1 = coluna1 + 0.6
 
+        # buraco 3 janelas
+        linha2 = 1.2
+        coluna2 = 0.4
+        for i in range(6):
+            for j in range(6):
+                glPushMatrix()
+                glTranslatef(linha2, coluna2, 6)
+                glRotatef(0, 0, 1, 0)
+                glScalef(0.9, 0.6, 0.5)
+                janela()
+                glPopMatrix()
+                linha2 = linha2 - 1.1
+                if(linha2 < - 5):
+                    linha2 = 1.2
+            coluna2 = coluna2 + 0.6
+            if(coluna2 > 2.8):
+                coluna2 = 0.4
 
     def Laje():
         pass

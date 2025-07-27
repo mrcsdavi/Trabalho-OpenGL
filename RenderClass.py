@@ -74,7 +74,7 @@ class RenderClass:
         AmbienteClass.Parede()
         AmbienteClass.ParedeJanela()
         AmbienteClass.janela()
-      
+        AmbienteClass.ParedeDir()
        
    
         # Desenha o modelo importado
@@ -89,3 +89,6 @@ class RenderClass:
 
 
         SombraClass.desenharSombra(lightClass.light_pos)
+
+
+        
