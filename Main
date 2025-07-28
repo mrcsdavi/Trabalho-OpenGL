@@ -2,7 +2,7 @@ from IniciarClass import  IniciarClass
 from CameraClass import CameraClass 
 # from SombraClass import SombraClass
 from RenderClass import RenderClass
-from InputClass import InputClass   
+from InputClass import InputClass
 
 import glfw
 from OpenGL.GL import *
@@ -24,9 +24,9 @@ def main():
     glfw.set_cursor_pos_callback(window, InputClass.mouseCallback(cam))
     glfw.set_input_mode(window, glfw.CURSOR, glfw.CURSOR_DISABLED)
 
-    IniciarClass.iniciar()
+    IniciarClass.iniciar() 
     CameraClass.atualizarCamera(cam)
-    
+
     while not glfw.window_should_close(window):
         width, height = glfw.get_framebuffer_size(window)
         CameraClass.changeSize(width, height)

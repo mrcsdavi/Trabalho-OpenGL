@@ -8,60 +8,55 @@ from OpenGL.GLU import *
 
 
 class ObjetosClass:
-    #O QUE ESTA COMENTADO É DO CUBO PARA TESTES !!
+   
 
     texturaCubo = None
     texturaPorta = None
     texturaLixeira = None
     modeloDiego = None
+
+    modeloMesaProf = None
+    modeloLaptopProf = None
     modeloMesa = None
+    modeloComputador = None
+    modeloCadeira = None
+    modeloLixeira = None
 
-    # def desenharCubo():
-    #     light = LightClass() 
-    #     light.iluminacao()
+    modeloQuadro = None
+    modeloTelaProjetor = None
+    modeloProjetor = None
 
-    #     if ObjetosClass.texturaCubo is None:
-    #        ObjetosClass.texturaCubo = textureClass("Parede.jpg")
+    def mesaProf():
+        def mesaProf():
+            if ObjetosClass.modeloMesaProf is None:
+                ObjetosClass.modeloMesaProf = ModeloClass(
+                    "MesaProf.obj",
+                    "Porta.png"
+                )
+            ObjetosClass.modeloMesaProf.desenhar()
 
-    #     glEnable(GL_TEXTURE_2D)
-    #     glBindTexture(GL_TEXTURE_2D, ObjetosClass.texturaCubo.texId)
-        
+        glPushMatrix()
+        glTranslatef(-3, -0.01, 3)
+        glScalef(1.2, 1.2, 0.9)
+        glRotatef(90,0,1,0)
+        mesaProf()
+        glPopMatrix()
 
-    #     glColor3f(1.0, 0.0, 0.0)
-        
-    #     metade = 0.5
-    #     vertices = [
-    #         [-metade, -metade, -metade], [metade, -metade, -metade],
-    #         [metade, metade, -metade], [-metade, metade, -metade],
-    #         [-metade, -metade, metade], [metade, -metade, metade],
-    #         [metade, metade, metade], [-metade, metade, metade]
-    #     ]
-    #     faces = [
-    #         [0, 3, 2, 1], [7, 4, 5, 6],
-    #         [1, 5, 4, 0], [3, 7, 6, 2],
-    #         [1, 2, 6, 5], [4, 7, 3, 0]
-    #     ]
+    def laptopProf():
+        def laptopProf():
+            if ObjetosClass.modeloLaptopProf is None:
+                ObjetosClass.modeloLaptopProf = ModeloClass(
+                    "LaptopComputer.obj",
+                    "AulaIvo.png"
+                )
+            ObjetosClass.modeloLaptopProf.desenhar()
 
-    #     texCoords = [
-    #         (0, 0),
-    #         (1, 0),
-    #         (1, 1),
-    #         (0, 1),
-    #     ]
-
-    #     normais = [
-    #     [0, 0, -1], [0, 0, 1], [-1, 0, 0],
-    #     [1, 0, 0], [0, 1, 0], [0, -1, 0]
-    #     ]
-    #     glGenerateMipmap(GL_TEXTURE_2D)
-
-    #     glBegin(GL_QUADS)
-    #     for i, face in enumerate(faces):
-    #         glNormal3fv(normais[i])
-    #         for j, vert in enumerate(face):
-    #             glTexCoord2fv(texCoords[j])
-    #             glVertex3fv(vertices[vert])
-    #     glEnd()
+        glPushMatrix()
+        glTranslatef(-3.1, 0.9, 3)
+        glScalef(0.02, 0.02, 0.02)
+        glRotatef(210,0,1,0)
+        laptopProf()
+        glPopMatrix()
 
     def mesa():
         def mesa1():
@@ -71,7 +66,7 @@ class ObjetosClass:
                     "TexturaMesa.jpg"
                 )
             ObjetosClass.modeloMesa.desenhar()
-        
+    
         # Mesas da esquerda - do fundão
         glPushMatrix()
         glTranslatef(10, -0.01, 5)
@@ -255,26 +250,140 @@ class ObjetosClass:
         mesa1()
         glPopMatrix()
 
+    def computador():
+        def computador():
+            if ObjetosClass.modeloComputador is None:
+                ObjetosClass.modeloComputador = ModeloClass(
+                    "desktopComputer.obj",
+                    "Mainmenu_cs.png"
+                )
+            ObjetosClass.modeloComputador.desenhar()
+        
+        # lado esquerdo das mesas
+        coluna = [10, 7, 4, 1]
+        linha = 5
+        for i in range(4):
+            for j in range(3):
+                glPushMatrix()
+                glTranslatef(coluna[i], 0.75, linha)
+                glScalef(0.5, 0.5, 0.5)
+                glRotate(270, 0, 1, 0.0)
+                computador()
+                glPopMatrix()
+                linha = linha - 1.5
+            if linha < 2:
+                linha = 5
 
-    def cadeiras():
-        pass
-    
+        # lado direito das mesas
+        linha = -2
+        for i in range(3):
+            for j in range(3):
+                glPushMatrix()
+                glTranslatef(coluna[i], 0.75, linha)
+                glScalef(0.5, 0.5, 0.5)
+                glRotate(270, 0, 1, 0.0)
+                computador()
+                glPopMatrix()
+                linha = linha - 1.5
+            if linha < 5:
+                linha = -2
+
+    def cadeira():
+        def cadeira():
+            if ObjetosClass.modeloCadeira is None:
+                ObjetosClass.modeloCadeira = ModeloClass(
+                    "Cadeira.obj",
+                    "TexturaCadeira.png"
+                )
+            ObjetosClass.modeloCadeira.desenhar()
+
+        #Cadeira do professor
+        glPushMatrix()
+        glTranslatef(-4, 0, 3)
+        glScalef(1, 1, 1)
+        glRotate(100, 0, 1, 0.0)
+        cadeira()
+        glPopMatrix()
+
+        #Cadeiras da esquerda
+        coluna = [11, 8, 5, 2]
+        linha = 5
+        for i in range(4):
+            for j in range(3):
+                glPushMatrix()
+                glTranslatef(coluna[i], 0, linha)
+                glScalef(1, 1, 1)
+                glRotate(25, 0, 1, 0.0)
+                cadeira()
+                glPopMatrix()
+                linha = linha - 1.5
+            if linha < 2:
+                linha = 5
+
+        #Cadeiras da direita
+        coluna = [11, 8, 5, 2]
+        linha = -2
+        for i in range(3):
+            for j in range(3):
+                glPushMatrix()
+                glTranslatef(coluna[i], 0, linha)
+                glScalef(1, 1, 1)
+                glRotate(25, 0, 1, 0.0)
+                cadeira()
+                glPopMatrix()
+                linha = linha - 1.5
+            if linha < -5:
+                linha = -2
+       
     # tentar fazer o projetor ligar e apresentar imagem, 
     # pode ser com o glQuads bem no quadro, e usar blending pra deixar transparente
-    def projetor(): 
-        pass
+    def telaProjetor():
+        def telaProjetor():
+            if ObjetosClass.modeloTelaProjetor is None:
+                ObjetosClass.modeloTelaProjetor = ModeloClass(
+                    "TelaProjetor.obj",
+                    "AulaIvo.png"
+                )
+            ObjetosClass.modeloTelaProjetor.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(-4.5, -0.3, 0)
+        glScalef(0.5, 0.5, 0.5)
+        glRotate(180, 0, 1, 0.0)
+        telaProjetor()
+        glPopMatrix()
+
+    def projetor():
+        def projetor():
+            if ObjetosClass.modeloProjetor is None:
+                ObjetosClass.modeloProjetor = ModeloClass(
+                    "projetor.obj",
+                    "ilumin1.png"
+                )
+            ObjetosClass.modeloProjetor.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(1, 1.5, 0)
+        glScalef(0.1, 0.1, 0.1)
+        glRotate(270, 0, 1, 0.0)
+        projetor()
+        glPopMatrix()
 
     def quadro(): # Tentar fazer o quadro produzir um reflexo
-        pass
-
-    def monitores(): # tentar incluir reflexo bem fraco 
-        pass
-
-    def computadores():
-        pass
-
-    def janelas(): 
-        pass
+        def quadro():
+            if ObjetosClass.modeloQuadro is None:
+                ObjetosClass.modeloQuadro = ModeloClass(
+                    "Quadro.obj",
+                    None
+                )
+            ObjetosClass.modeloQuadro.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(-4.7, 1, 0)
+        glScalef(3.5, 2.5, 8)
+        glRotate(90, 0, 1, 0.0)
+        quadro()
+        glPopMatrix()
 
     def desenharPorta():
         # Configurações básicas (sem iluminação para simplificar)
@@ -315,9 +424,21 @@ class ObjetosClass:
 
         glDisable(GL_TEXTURE_2D)
 
-    def desenharLixeira():
-        pass
+    def lixeira():
+        def lixeira():
+            if ObjetosClass.modeloLixeira is None:
+                ObjetosClass.modeloLixeira = ModeloClass(
+                    "Lixeira.obj",
+                    "Lixeira.png"
+                )
+            ObjetosClass.modeloLixeira.desenhar()
         
+        glPushMatrix()
+        glTranslatef(-2, 0, -5)
+        glScalef(0.02, 0.02, 0.02)
+        lixeira()
+        glPopMatrix()
+
     def diego():
         def diegoModelo():
             if ObjetosClass.modeloDiego is None:
@@ -328,7 +449,7 @@ class ObjetosClass:
             ObjetosClass.modeloDiego.desenhar()
         
         glPushMatrix()
-        glTranslatef(-3.5, 0, -5)
+        glTranslatef(-1.5, 0, -5)
         glScalef(0.25, 0.25,0.25)
         glRotate(90, 0, 1, 0.0)
         diegoModelo()

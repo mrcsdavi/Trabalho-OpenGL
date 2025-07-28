@@ -10,6 +10,7 @@ from OpenGL.GLU import *
 
 class RenderClass:
     def render(cam):
+        
         lightClass = LightClass() # instancia a classe iluminação
   
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -31,62 +32,42 @@ class RenderClass:
         # ambiente
         AmbienteClass.desenharChao()
         AmbienteClass.Teto()
-        # parede da direita
-        # AmbienteClass.Parede()
-
-        # # parede da esquerda
-        # glPushMatrix()
-        # glTranslatef(0,3,0)
-        # glRotatef(180,1,0,0)
-        # AmbienteClass.Parede()
-        # glPopMatrix()
-
-        # # parede das costas da camera
-        # glPushMatrix()
-        # glTranslatef(7, 0, 0)
-        # glRotatef(270, 0, 9, 0)
-        # AmbienteClass.Parede()
-        # glPopMatrix()
-
-        # # parede da frente da camera
-        # glPushMatrix()
-        # glTranslatef(0, 0, 0)
-        # glRotatef(450, 0, 9, 0)
-        # AmbienteClass.Parede()
-        # glPopMatrix()
-
+    
         #porta
         glPushMatrix()
-        glTranslate(-5, 0.99, -5.99)
+        glTranslate(-4, 0.99, -5.95)
         ObjetosClass.desenharPorta()
-        glPopMatrix()
-        
-        #lixeira
-        glPushMatrix()
-        glTranslate(-4, 0.15 , -5.5)
-        ObjetosClass.desenharLixeira()
         glPopMatrix()
 
         #Diego
         ObjetosClass.diego()
         ObjetosClass.mesa()
+        ObjetosClass.mesaProf()
+        ObjetosClass.laptopProf()
 
         AmbienteClass.Parede()
         AmbienteClass.ParedeJanela()
-        AmbienteClass.janela()
         AmbienteClass.ParedeDir()
-       
-   
-        # Desenha o modelo importado
-        
-   
+
+        AmbienteClass.janela()
+        AmbienteClass.janela2()
+        AmbienteClass.desenharLuz()
+        AmbienteClass.interruptor()
+        AmbienteClass.ArCondi()
+
+        ObjetosClass.telaProjetor()
+        ObjetosClass.quadro()
+        ObjetosClass.computador()
+        ObjetosClass.projetor()
+        ObjetosClass.cadeira()
+        ObjetosClass.lixeira()
 
 
-        # glPushMatrix()
-        # glTranslate(0.0, 0.5, 0.0)
-        # ObjetosClass.desenharCubo()
-        # glPopMatrix()
 
+        # desenhar skybox
+        glDisable(GL_CULL_FACE) 
+        AmbienteClass.desenharSkybox()
+        glEnable(GL_CULL_FACE)
 
         SombraClass.desenharSombra(lightClass.light_pos)
 

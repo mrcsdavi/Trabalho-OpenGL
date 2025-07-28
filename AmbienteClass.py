@@ -5,6 +5,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 class AmbienteClass:
+    modeloSkybox = None
     
     texturaChao = None  # textura é da classe, para ser reutilizada
     texturaParede = None
@@ -12,7 +13,12 @@ class AmbienteClass:
     modeloParedeDir = None
     modeloParede = None
     modeloParedeJanela = None
+
     modeloJanela = None
+    modeloJanela2 = None
+    modeloLuz = None
+    modeloInterruptor = None
+    modeloArCondi = None
     
     def desenharChao():
         if AmbienteClass.texturaChao is None:
@@ -230,6 +236,109 @@ class AmbienteClass:
             coluna2 = coluna2 + 0.6
             if(coluna2 > 2.8):
                 coluna2 = 0.4
+
+    def janela2():
+        def janela2():
+            if AmbienteClass.modeloJanela2 is None:
+                AmbienteClass.modeloJanela2 = ModeloClass(
+                    "Janela2.obj",
+                    None
+                )
+            AmbienteClass.modeloJanela2.desenhar()
+
+        # janelas da parede da direita
+        linha3 = 13
+        for j in range(14):
+            glPushMatrix()
+            glTranslatef(linha3, 2.25, -6)
+            glRotatef(180, 0, 1, 0)
+            glScalef(0.9, 0.6, 0.5)
+            janela2()
+            glPopMatrix()
+            linha3 = linha3 - 1.1
+
+        glPushMatrix()
+        glTranslatef(13, 2.25, -6)
+        glRotatef(180, 0, 1, 0)
+        glScalef(0.9, 0.6, 0.5)
+        janela2()
+        glPopMatrix()
+    
+    def desenharSkybox():
+        def desenharSkybox():
+            if AmbienteClass.modeloSkybox is None:
+                AmbienteClass.modeloSkybox = ModeloClass(
+                    "Skybox.obj",
+                    "Skybox1.png"
+                )
+            AmbienteClass.modeloSkybox.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(0, 1, 0)
+        glScalef(100, 100, 100)
+        desenharSkybox()
+        glPopMatrix()
+
+    def desenharLuz():
+        def desenharLuz():
+            if AmbienteClass.modeloLuz is None:
+                AmbienteClass.modeloLuz = ModeloClass(
+                    "Luz.obj",
+                    "ilumin2.png"
+                )
+            AmbienteClass.modeloLuz.desenhar()
+        
+        linha = 3
+        coluna = 0
+        for i in range(3):
+            for j in range(3):
+                glPushMatrix()
+                glTranslatef(coluna, 3, linha)
+                glScalef(-0.1, -0.1, -0.1)
+                desenharLuz()
+                glPopMatrix()
+                linha = linha - 3
+                if(linha < -3):
+                    linha = 3
+            coluna = coluna + 4
+
+    def interruptor():
+        def interruptor():
+            if AmbienteClass.modeloInterruptor is None:
+                AmbienteClass.modeloInterruptor = ModeloClass(
+                    "interruptor.obj",
+                    "ilumin2.png"
+                )
+            AmbienteClass.modeloInterruptor.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(-3, 1.5, -5.92)
+        glScalef(0.4, 0.4, 0.4)
+        glRotate(270, 0, 1,0)
+        interruptor()
+        glPopMatrix()
+
+    def ArCondi():
+        def ArCondi():
+            if AmbienteClass.modeloArCondi is None:
+                AmbienteClass.modeloArCondi = ModeloClass(
+                    "ArCondicionado.obj",
+                    "ilumin2.png"
+                )
+            AmbienteClass.modeloArCondi.desenhar()
+        
+        glPushMatrix()
+        glTranslatef(-4.7, 1.7, 3)
+        glScalef(0.2, 0.2, 0.2)
+        ArCondi()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(12.9, 1.7, -3)
+        glScalef(0.2, 0.2, 0.2)
+        glRotate(180, 0, 1,0)
+        ArCondi()
+        glPopMatrix()
 
     def Laje():
         pass
