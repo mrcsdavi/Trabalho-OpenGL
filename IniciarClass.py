@@ -1,4 +1,8 @@
 from LightClass import LightClass ## classe de iluminação importada
+from InputClass import InputClass
+
+luz = LightClass()
+
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -9,6 +13,7 @@ class IniciarClass:
     def iniciar():        
         light = LightClass() # CLASSE INSTANCIADA ILUMINAÇÃO
         light.iluminacao() # função de iluminação instanciada
+        InputClass.configurarLuz(luz)
 
         glEnable(GL_DEPTH_TEST) 
         glShadeModel(GL_FLAT)

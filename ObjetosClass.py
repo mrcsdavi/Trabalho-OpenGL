@@ -8,7 +8,7 @@ from OpenGL.GLU import *
 
 
 class ObjetosClass:
-   
+    tela_projetor_com_textura = True  # Começa com textura
 
     texturaCubo = None
     texturaPorta = None
@@ -338,19 +338,27 @@ class ObjetosClass:
     # tentar fazer o projetor ligar e apresentar imagem, 
     # pode ser com o glQuads bem no quadro, e usar blending pra deixar transparente
     def telaProjetor():
-        def telaProjetor():
+        def telaProjetorInterna():
             if ObjetosClass.modeloTelaProjetor is None:
                 ObjetosClass.modeloTelaProjetor = ModeloClass(
                     "TelaProjetor.obj",
                     "AulaIvo.png"
                 )
-            ObjetosClass.modeloTelaProjetor.desenhar()
-        
+            # Ativa ou desativa a textura conforme o estado
+            if ObjetosClass.tela_projetor_com_textura:
+                ObjetosClass.modeloTelaProjetor.desenhar()
+            else:
+                # Desenha o modelo sem textura (força textureId=None temporariamente)
+                tex_id_backup = ObjetosClass.modeloTelaProjetor.textureId
+                ObjetosClass.modeloTelaProjetor.textureId = None
+                ObjetosClass.modeloTelaProjetor.desenhar()
+                ObjetosClass.modeloTelaProjetor.textureId = tex_id_backup
+
         glPushMatrix()
         glTranslatef(-4.5, -0.3, 0)
         glScalef(0.5, 0.5, 0.5)
         glRotate(180, 0, 1, 0.0)
-        telaProjetor()
+        telaProjetorInterna()
         glPopMatrix()
 
     def projetor():
@@ -460,5 +468,4 @@ class ObjetosClass:
 
         
     # Posiciona o modelo corretamente na cena
-        
-        
+

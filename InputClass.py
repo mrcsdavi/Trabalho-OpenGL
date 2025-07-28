@@ -1,9 +1,18 @@
 from CameraClass import CameraClass
+from LightClass import LightClass
+import time
+from ObjetosClass import ObjetosClass
 
 import glfw
 import math
 
 class InputClass:
+    luz = None  # atributo de classe (estático), acessível em qualquer método
+    ultimo_toggle_luz = 0  # timestamp da última troca
+
+    def configurarLuz(luz_obj):
+        InputClass.luz = luz_obj
+
     def processarInput(window, cam):
         vel = 0.0
         
@@ -56,6 +65,48 @@ class InputClass:
         if glfw.get_key(window, glfw.KEY_ESCAPE) == glfw.PRESS:
             glfw.set_window_should_close(window, True)
 
+        # ------ INTERRUPTOR DO PROJETOR ------
+        projetor_pos = [0, 0, 0]
+        raio_ativacao_proj = 2.0
+
+        dx_proj = cam["pos"][0] - projetor_pos[0]
+        dz_proj = cam["pos"][2] - projetor_pos[2]
+        distancia_proj = math.sqrt(dx_proj * dx_proj + dz_proj * dz_proj)
+
+        if not hasattr(InputClass, "ultimo_toggle_projetor"):
+            InputClass.ultimo_toggle_projetor = 0
+
+        agora = time.time()
+        cooldown = 0.5
+
+        if (distancia_proj < raio_ativacao_proj and
+            glfw.get_key(window, glfw.KEY_E) == glfw.PRESS and
+            agora - InputClass.ultimo_toggle_projetor > cooldown):
+            ObjetosClass.tela_projetor_com_textura = not ObjetosClass.tela_projetor_com_textura
+            InputClass.ultimo_toggle_projetor = agora
+
+        # ------ INTERRUPTOR ------
+        interruptor_pos = [-3.0, 0.0, -5.92]  # posição do interruptor
+        raio_ativacao = 2.0
+
+        dx = cam["pos"][0] - interruptor_pos[0]
+        dz = cam["pos"][2] - interruptor_pos[2]
+        distancia = math.sqrt(dx * dx + dz * dz)
+
+        agora = time.time()
+        cooldown = 0.5  # meio segundo de delay
+
+        if (distancia < raio_ativacao and
+            glfw.get_key(window, glfw.KEY_E) == glfw.PRESS and
+            agora - InputClass.ultimo_toggle_luz > cooldown):
+            luz = InputClass.luz
+            if luz is not None:
+                if luz.light_pos == [10, 10.0, 5.0, 1.0]:
+                    luz.light_pos = [0, 10, -50, -1]
+                else:
+                    luz.light_pos = [10, 10.0, 5.0, 1.0]
+            InputClass.ultimo_toggle_luz = agora
+
     def mouseCallback(cam):
         def callback(window, xpos, ypos):
             if cam["primeiro_mov"]:
@@ -77,5 +128,4 @@ class InputClass:
             cam["pitch"] = max(-89.0, min(89.0, cam["pitch"]))
             CameraClass.atualizarCamera(cam)
         return callback
-    
-    
+
